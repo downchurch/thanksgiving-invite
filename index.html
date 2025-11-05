@@ -2,62 +2,128 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VIP 초대장</title>
-  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>추수감사절 간증집회 VIP 초대장</title>
+  <meta name="theme-color" content="#0e2a44" />
+  <meta name="description" content="감사의 계절, 은혜의 이야기가 있는 자리에 당신을 초대합니다. 2025.11.30 (주일) 1부 09:30 / 2부 12:00 | 울산다운공동체교회" />
   <style>
-    body {
+    * { box-sizing: border-box; }
+    html, body {
       margin: 0;
       padding: 0;
-      font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      background: #ffffff;
-      color: #1e1e1e;
+      background: #faf8f4;
+      font-family: 'Pretendard', sans-serif;
+      color: #2b2b2b;
     }
-    .container {
+    .wrap {
       max-width: 420px;
       margin: 0 auto;
-      padding: 40px 24px;
+      background: #fff;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.05);
+    }
+    .section {
+      padding: 20px 18px;
       text-align: center;
     }
     .badge {
       display: inline-block;
-      border: 2px solid #caa45b;
-      border-radius: 30px;
-      padding: 8px 20px;
-      font-size: 16px;
-      color: #caa45b;
-      letter-spacing: 0.08em;
-      margin-bottom: 24px;
+      padding: 6px 12px;
+      border: 1px solid #c9a86a;
+      color: #c9a86a;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-bottom: 10px;
     }
     h1 {
-      font-size: 28px;
-      margin: 0 0 8px;
-      font-weight: 500;
-      color: #17303d;
+      font-size: 22px;
+      margin: 0;
+      color: #0e2a44;
     }
-    h2 {
-      font-size: 34px;
-      margin: 0 0 28px;
-      font-weight: 800;
-      color: #17303d;
+    .lead {
+      font-size: 14px;
+      color: #666;
+      margin: 12px 0 24px;
     }
-    .desc {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #555;
+    img {
+      width: 100%;
+      display: block;
+      border-radius: 0;
+    }
+    .youtube {
+      padding: 20px;
+      text-align: center;
+    }
+    iframe {
+      max-width: 100%;
+      border-radius: 12px;
+    }
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      padding: 20px;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 14px 20px;
+      background-color: #0e2a44;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+    .btn-outline {
+      background: #fff;
+      border: 1px solid #0e2a44;
+      color: #0e2a44;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="badge">INVITATION</div>
-    <h1>추수감사절 간증집회</h1>
-    <h2>VIP 초대장</h2>
-    <p class="desc">
-      감사의 계절,<br/>
-      은혜의 이야기와 음악이 있는 자리에<br/>
-      소중한 당신을 초대합니다.
-    </p>
+  <div class="wrap">
+    
+    <section class="section">
+      <span class="badge">INVITATION</span>
+      <h1>추수감사절 간증집회<br>VIP 초대장</h1>
+      <p class="lead">감사의 계절,<br>은혜의 이야기가 있는 자리에<br>소중한 당신을 초대합니다.</p>
+    </section>
+
+    <!-- 포스터 이미지 -->
+    <img src="thanksgiving-01.jpg" alt="포스터 앞면" />
+    <img src="thanksgiving-02.jpg" alt="포스터 뒷면" />
+
+    <!-- 강사 소개 -->
+    <section class="section">
+      <h2 style="font-size:18px; margin-bottom:10px;">강사 소개</h2>
+      <img src="nadeul_01.png" alt="나들 목사님 단독 사진" />
+      <p style="font-size:14px; line-height:1.7; margin:16px 0;">
+        90년대 청춘, <br/>힙합 그룹 '언더그라운드' 메인 보컬<br/>
+        인기 트로트 방송 출연<br/>
+        현재는 ‘나들’이란 이름으로 복음 전파에 헌신 중
+      </p>
+      <img src="nadeul_02.png" alt="나들 목사님과 찬양 사역자들" />
+    </section>
+
+    <!-- 유튜브 영상 -->
+    <section class="youtube">
+      <iframe width="390" height="260" src="https://www.youtube.com/embed/-mZwFdTvAjo?si=gjH8rQ0wN7f-XbqO&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </section>
+
+    <!-- 지도 embed -->
+    <section class="section">
+      <h2 style="font-size:18px; margin-bottom:10px;">오시는 길</h2>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.0191237102968!2d129.2398594!3d35.5779198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35663277c7c96641%3A0x763c59d1f4fc6b94!2z64uk7Jq06rO164-Z7LK06rWQ7ZqM!5e0!3m2!1sko!2skr!4v1762173032577!5m2!1sko!2skr" width="100%" height="240" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a class="btn" href="https://maps.app.goo.gl/kaKkAJJSRj9u52zF7" target="_blank">Google 지도에서 열기</a>
+      <a class="btn btn-outline" href="tel:0522493695">문의 052-249-3695</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <img src="logo_PNG 1.png" alt="울산다운공동체교회 로고" style="width:160px; margin-bottom:10px;" />
+      울산다운공동체교회<br/>One message all generations
+    </footer>
+
   </div>
 </body>
 </html>
