@@ -138,8 +138,8 @@
   </section>
 
   <!-- 배경음악 -->
-  <audio id="bgm" src="waitonyou_01.mp3" loop preload="auto" playsinline></audio>
-  <button id="bgm-toggle">🔇</button>
+  <audio id="bgm" src="WaitOnYou.mp3" preload="auto" loop autoplay muted playsinline></audio>
+ <button id="bgm-toggle">🔇</button>
 
   <img src="thanksgiving-01.jpg" alt="포스터 앞면" />
   <img src="thanksgiving-02.jpg" alt="포스터 뒷면" />
@@ -184,28 +184,33 @@
 </div>
 
 <script>
-  const audio = document.getElementById("bgm");
-  const btn = document.getElementById("bgm-toggle");
-  let isMuted = true;
+const audio = document.getElementById("bgm");
+const btn = document.getElementById("bgm-toggle");
 
-  // 페이지 로드시 무음 자동재생 시도
-  window.addEventListener("DOMContentLoaded", () => {
+let isMuted = true;
+
+// 페이지 로드 시: Safari가 허용하는 유일한 자동재생 형태 (무음)
+window.addEventListener("DOMContentLoaded", () => {
+  audio.muted = true;
+  audio.volume = 0;
+  audio.play().catch(()=>{}); 
+});
+
+// 버튼 클릭 시: 실제 음소거 해제 + 볼륨 활성화
+btn.addEventListener("click", () => {
+  if (isMuted) {
+    audio.muted = false;   // 반드시 필요
+    audio.volume = 0.25;
+    btn.textContent = "🔊";
+  } else {
     audio.volume = 0;
-    audio.play().catch(() => {});
-  });
-
-  // 버튼 클릭 시 음악 재생/정지
-  btn.addEventListener("click", () => {
-    if (isMuted) {
-      audio.volume = 0.28;
-      btn.textContent = "🔊";
-    } else {
-      audio.volume = 0;
-      btn.textContent = "🔇";
-    }
-    isMuted = !isMuted;
-  });
+    audio.muted = true;
+    btn.textContent = "🔇";
+  }
+  isMuted = !isMuted;
+});
 </script>
+
 
 </body>
 </html>
