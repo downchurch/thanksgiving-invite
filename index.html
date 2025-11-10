@@ -122,8 +122,34 @@
     box-shadow: 0 4px 14px rgba(0,0,0,0.18);
     font-size: 20px;
     cursor: pointer;
+    z-index: 1000;
   }
   #bgm-toggle:active { transform: scale(0.95); }
+
+  /* 초기 음악 재생 안내 오버레이 (선택사항) */
+  #play-prompt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+  #play-prompt.hidden { display: none; }
+  #play-prompt button {
+    padding: 16px 32px;
+    font-size: 18px;
+    background: #C9A86A;
+    color: #0e2a44;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+  }
   
 </style>
   
@@ -131,6 +157,12 @@
 
   
 <body>
+
+<!-- 초기 재생 프롬프트 (선택사항) -->
+<div id="play-prompt">
+  <button id="start-music">🎵 배경음악과 함께 시작하기</button>
+</div>
+
 <div class="wrap">
 
   <section class="section">
@@ -141,7 +173,10 @@
   </section>
 
   <!-- 배경음악 -->
-  <audio id="bgm" src="waitonyou_01.mp3" preload="auto" loop autoplay muted playsinline></audio>
+  <audio id="bgm" preload="auto" loop playsinline>
+    <source src="waitonyou_01.mp3" type="audio/mpeg">
+    <source src="waitonyou_01.ogg" type="audio/ogg">
+  </audio>
   <button id="bgm-toggle">🔇</button>
 
   <img src="thanksgiving-01.jpg" alt="포스터 앞면" />
@@ -157,8 +192,8 @@
         <h3>나들 | 박영열 목사</h3>
         <h4>(엔터교회 담임)</h4>
         <p>
-          90년대 중반, 앨범 ‘좋아좋아’로 큰 사랑을 받았던 ‘일기예보’의 보컬 ‘나들’로 활동하셨습니다.<br><br>
-          ‘인형의 꿈’, ‘그대만 있다면’, ‘니가 좋아’ 등 수많은 히트곡과 더불어
+          90년대 중반, 앨범 '좋아좋아'로 큰 사랑을 받았던 '일기예보'의 보컬 '나들'로 활동하셨습니다.<br><br>
+          '인형의 꿈', '그대만 있다면', '니가 좋아' 등 수많은 히트곡과 더불어
           복음송 작곡, 찬양사역, 간증사역으로 많은 은혜를 끼치고 계십니다.
         </p>
       </div>
@@ -171,7 +206,7 @@
   <section class="section">
     <h2>오시는 길</h2>
     <br>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.0191237102968!2d129.2398594!3d35.5779198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35663277c7c96641%3A0x763c59d1f4fc6b94!2z64uk7Jq06rO164-Z7LK06rWQ7ZqM!5e0!3m2!1sko!2skr!4v1762173032577!5m2!1sko!2skr"
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.0191237102968!2d129.2398594!3d35.5779198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35663277c7c96641%3A0x763c59d1f4fc6b94!2z64uk7Jq06rO164-Z7LK06rWw7ZqM!5e0!3m2!1sko!2skr!4v1762173032577!5m2!1sko!2skr"
       width="100%" height="240" style="border:0;" allowfullscreen loading="lazy"></iframe>
 
     <div class="button-group">
@@ -189,31 +224,47 @@
 <script>
 const audio = document.getElementById("bgm");
 const btn = document.getElementById("bgm-toggle");
+const playPrompt = document.getElementById("play-prompt");
+const startBtn = document.getElementById("start-music");
 
-let isMuted = true;
+let isPlaying = false;
 
-// 페이지 로드 시: Safari가 허용하는 유일한 자동재생 형태 (무음)
-window.addEventListener("DOMContentLoaded", () => {
-  audio.muted = true;
-  audio.volume = 0;
-  audio.play().catch(()=>{}); 
+// 음악 재생 함수
+function playMusic() {
+  audio.volume = 0.7;
+  audio.play()
+    .then(() => {
+      isPlaying = true;
+      btn.textContent = "🔊";
+    })
+    .catch(err => {
+      console.log("자동재생 실패:", err);
+      isPlaying = false;
+      btn.textContent = "🔇";
+    });
+}
+
+// 초기 재생 버튼 클릭 (사용자 인터랙션)
+startBtn.addEventListener("click", () => {
+  playPrompt.classList.add("hidden");
+  playMusic();
 });
 
-// 버튼 클릭 시: 실제 음소거 해제 + 볼륨 활성화
+// 토글 버튼
 btn.addEventListener("click", () => {
-  if (isMuted) {
-    audio.muted = false;   // 반드시 필요
-    audio.volume = 0.70;
-    btn.textContent = "🔊";
-  } else {
-    audio.volume = 0;
-    audio.muted = true;
+  if (isPlaying) {
+    audio.pause();
     btn.textContent = "🔇";
+    isPlaying = false;
+  } else {
+    playMusic();
   }
-  isMuted = !isMuted;
 });
-</script>
 
-
-</body>
-</html>
+// 페이지 로드 시 자동 시도 (대부분 실패하지만 시도)
+window.addEventListener("load", () => {
+  audio.play()
+    .then(() => {
+      playPrompt.classList.add("hidden");
+      isPlaying = true;
+      btn
