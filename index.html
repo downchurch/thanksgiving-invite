@@ -124,9 +124,12 @@
     cursor: pointer;
   }
   #bgm-toggle:active { transform: scale(0.95); }
+  
 </style>
+  
 </head>
 
+  
 <body>
 <div class="wrap">
 
@@ -138,8 +141,8 @@
   </section>
 
   <!-- 배경음악 -->
-  <audio id="bgm" src="WaitOnYou.mp3" preload="auto" loop autoplay muted playsinline></audio>
- <button id="bgm-toggle">🔇</button>
+  <audio id="bgm" src="waitonyou_01.mp3" preload="auto" loop autoplay muted playsinline></audio>
+  <button id="bgm-toggle">🔇</button>
 
   <img src="thanksgiving-01.jpg" alt="포스터 앞면" />
   <img src="thanksgiving-02.jpg" alt="포스터 뒷면" />
@@ -175,7 +178,7 @@
       <a class="btn" href="http://www.downch.org" target="_blank">교회 홈페이지 바로가기</a>
       <a class="btn btn-outline" href="tel:0522493695">문의 052-249-3695</a>
     </div>
-  </section>
+  </section><br><br>
 
   <footer class="footer">
     <img src="logo_PNG 1.png" style="width:160px; margin:0 auto 10px;">
@@ -200,7 +203,7 @@ window.addEventListener("DOMContentLoaded", () => {
 btn.addEventListener("click", () => {
   if (isMuted) {
     audio.muted = false;   // 반드시 필요
-    audio.volume = 0.25;
+    audio.volume = 0.70;
     btn.textContent = "🔊";
   } else {
     audio.volume = 0;
