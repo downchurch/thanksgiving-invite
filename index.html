@@ -173,6 +173,20 @@
   align-items: center;
   gap: 10px;
 }
+#bgm-toggle{
+  position: fixed;
+  right: 14px;
+  bottom: 18px;
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #0e2a44;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  font-size: 20px;
+  cursor: pointer;
+}
+#bgm-toggle:active{ transform: scale(0.95); }
 
   </style>
 </head>
@@ -185,6 +199,37 @@
       <p class="lead">감사의 계절,<br>은혜의 이야기가 있는 자리에<br>소중한 당신을 초대합니다.</p>
     </section>
 
+<!-- 숨겨진 배경음악 플레이어 -->
+<audio id="bgm" src="WaitOnYou.mp3" loop preload="auto"></audio>
+
+<!-- 배경음악 토글 버튼 -->
+<button id="bgm-toggle">🔇</button>
+
+<script>
+  const audio = document.getElementById("bgm");
+  const btn = document.getElementById("bgm-toggle");
+  let isMuted = true;
+
+  // 페이지 로드시 무음 자동재생 시도
+  window.addEventListener("DOMContentLoaded", () => {
+    audio.volume = 0;   // 무음
+    audio.play().catch(()=>{});
+  });
+
+  // 토글 버튼
+  btn.addEventListener("click", () => {
+    if (isMuted) {
+      audio.volume = 0.28;    // 모바일 배경에 적합한 낮은 볼륨
+      btn.textContent = "🔊";
+    } else {
+      audio.volume = 0;
+      btn.textContent = "🔇";
+    }
+    isMuted = !isMuted;
+  });
+</script>
+
+    
     <!-- 포스터 이미지 -->
     <img src="thanksgiving-01.jpg" alt="포스터 앞면" /><br>
     <img src="thanksgiving-02.jpg" alt="포스터 뒷면" />
