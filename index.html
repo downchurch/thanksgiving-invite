@@ -204,31 +204,6 @@
 
 <!-- 배경음악 토글 버튼 -->
 <button id="bgm-toggle">🔇</button>
-
-<script>
-  const audio = document.getElementById("bgm");
-  const btn = document.getElementById("bgm-toggle");
-  let isMuted = true;
-
-  // 페이지 로드시 무음 자동재생 시도
-  window.addEventListener("DOMContentLoaded", () => {
-    audio.volume = 0;   // 무음
-    audio.play().catch(()=>{});
-  });
-
-  // 토글 버튼
-  btn.addEventListener("click", () => {
-    if (isMuted) {
-      audio.volume = 0.28;    // 모바일 배경에 적합한 낮은 볼륨
-      btn.textContent = "🔊";
-    } else {
-      audio.volume = 0;
-      btn.textContent = "🔇";
-    }
-    isMuted = !isMuted;
-  });
-</script>
-
     
     <!-- 포스터 이미지 -->
     <img src="thanksgiving-01.jpg" alt="포스터 앞면" /><br>
@@ -275,5 +250,35 @@
     </footer>
 
   </div>
+
+
+<script>
+  const audio = document.getElementById("bgm");
+  const btn = document.getElementById("bgm-toggle");
+  let isMuted = true;
+
+  // 페이지 로드시 무음 자동재생 시도
+  window.addEventListener("DOMContentLoaded", () => {
+    audio.volume = 0;   // 무음
+    audio.play().catch(()=>{});
+  });
+
+  // 토글 버튼
+  btn.addEventListener("click", () => {
+    if (isMuted) {
+      audio.volume = 0.28;    // 모바일 배경에 적합한 낮은 볼륨
+      btn.textContent = "🔊";
+    } else {
+      audio.volume = 0;
+      btn.textContent = "🔇";
+    }
+    isMuted = !isMuted;
+  });
+</script>
+  
 </body>
 </html>
+
+
+
+
