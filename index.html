@@ -173,7 +173,23 @@
   align-items: center;
   gap: 10px;
 }
-#bgm-toggle{ position: fixed; right: 14px; bottom: 18px; width: 48px; height: 48px; border-radius: 50%; border: none; background: #0e2a44; color: #fff; box-shadow: 0 4px 14px rgba(0,0,0,0.18); font-size: 20px; cursor: pointer; } #bgm-toggle:active{ transform: scale(0.95);
+#bgm-toggle {
+  position: fixed;
+  right: 14px;
+  bottom: 18px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #0e2a44;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  font-size: 20px;
+  cursor: pointer;
+}
+#bgm-toggle:active {
+  transform: scale(0.95);
+}
   </style>
 </head>
 <body>
@@ -234,23 +250,12 @@
 
   </div>
 
-#bgm-toggle {
-  position: fixed;
-  right: 14px;
-  bottom: 18px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: none;
-  background: #0e2a44;
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-  font-size: 20px;
-  cursor: pointer;
-}
-#bgm-toggle:active {
-  transform: scale(0.95);
-}
+<script> const audio = document.getElementById("bgm"); 
+  const btn = document.getElementById("bgm-toggle"); let isMuted = true; 
+  // 페이지 로드시 무음 자동재생 시도 window.addEventListener("DOMContentLoaded", () => { audio.volume = 0; // 무음 audio.play().catch(()=>{}); }); 
+  // 토글 버튼 btn.addEventListener("click", () => { if (isMuted) { audio.volume = 0.28; 
+  // 모바일 배경에 적합한 낮은 볼륨 btn.textContent = "🔊"; } else { audio.volume = 0; btn.textContent = "🔇"; } isMuted = !isMuted; }); 
+</script>
 
 
 </body>
