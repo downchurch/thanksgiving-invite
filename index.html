@@ -72,4 +72,140 @@
     display: inline-block;
     padding: 8px 20px;
     border: 2px solid #c9a86a;
-    color
+    color: #c9a86a;
+    border-radius: 30px;
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+
+  h1 { font-size: 34px; margin: 0; color:#153240; font-weight:400; }
+  h2 { font-size: 32px; margin: 0; color:#153240; font-weight:800; }
+  .lead { font-size: 14px; color:#666; margin:12px 0 24px; line-height:1.8; }
+
+  img { max-width: 100%; height:auto; }
+
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    padding: 20px;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 14px 20px;
+    background-color: #0e2a44;
+    color: #C9A86A;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 999px;
+  }
+  .btn-outline {
+    background: #fff;
+    border: 1px solid #0e2a44;
+    color: #0e2a44;
+  }
+  .button-group { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+  /* 배경음악 버튼 */
+  #bgm-toggle {
+    position: fixed;
+    right: 14px;
+    bottom: 18px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: #0e2a44;
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    font-size: 20px;
+    cursor: pointer;
+  }
+  #bgm-toggle:active { transform: scale(0.95); }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <section class="section">
+    <span class="badge">INVITATION</span><br>
+    <h1>추수감사절 간증집회</h1>
+    <h2>VIP 초대장</h2>
+    <p class="lead">감사의 계절,<br>은혜의 이야기가 있는 자리에<br>소중한 당신을 초대합니다.</p>
+  </section>
+
+  <!-- 배경음악 -->
+  <audio id="bgm" src="waitonyou_01.mp3" loop preload="auto" playsinline></audio>
+  <button id="bgm-toggle">🔇</button>
+
+  <img src="thanksgiving-01.jpg" alt="포스터 앞면" />
+  <img src="thanksgiving-02.jpg" alt="포스터 뒷면" />
+
+  <section class="section2">
+    <h2 style="font-size:28px;">강사 소개</h2>
+    <p class="subtitle">추수감사절 간증집회를 섬겨주실 강사를 소개합니다.</p>
+
+    <div class="profile-wrapper">
+      <div class="profile-image"><img src="nadeul_01.png" alt="강사 사진"></div>
+      <div class="profile-text">
+        <h3>나들 | 박영열 목사</h3>
+        <h4>(엔터교회 담임)</h4>
+        <p>
+          90년대 중반, 앨범 ‘좋아좋아’로 큰 사랑을 받았던 ‘일기예보’의 보컬 ‘나들’로 활동하셨습니다.<br><br>
+          ‘인형의 꿈’, ‘그대만 있다면’, ‘니가 좋아’ 등 수많은 히트곡과 더불어
+          복음송 작곡, 찬양사역, 간증사역으로 많은 은혜를 끼치고 계십니다.
+        </p>
+      </div>
+    </div>
+    <div class="profile-bottom-img">
+      <img src="nadeul_02.png" alt="나들 목사와 찬양팀">
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>오시는 길</h2>
+    <br>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3245.0191237102968!2d129.2398594!3d35.5779198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35663277c7c96641%3A0x763c59d1f4fc6b94!2z64uk7Jq06rO164-Z7LK06rWQ7ZqM!5e0!3m2!1sko!2skr!4v1762173032577!5m2!1sko!2skr"
+      width="100%" height="240" style="border:0;" allowfullscreen loading="lazy"></iframe>
+
+    <div class="button-group">
+      <a class="btn" href="http://www.downch.org" target="_blank">교회 홈페이지 바로가기</a>
+      <a class="btn btn-outline" href="tel:0522493695">문의 052-249-3695</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <img src="logo_PNG 1.png" style="width:160px; margin:0 auto 10px;">
+  </footer>
+
+</div>
+
+<script>
+  const audio = document.getElementById("bgm");
+  const btn = document.getElementById("bgm-toggle");
+  let isMuted = true;
+
+  // 페이지 로드시 무음 자동재생 시도
+  window.addEventListener("DOMContentLoaded", () => {
+    audio.volume = 0;
+    audio.play().catch(() => {});
+  });
+
+  // 버튼 클릭 시 음악 재생/정지
+  btn.addEventListener("click", () => {
+    if (isMuted) {
+      audio.volume = 0.28;
+      btn.textContent = "🔊";
+    } else {
+      audio.volume = 0;
+      btn.textContent = "🔇";
+    }
+    isMuted = !isMuted;
+  });
+</script>
+
+</body>
+</html>
