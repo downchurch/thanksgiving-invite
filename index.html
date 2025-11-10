@@ -174,8 +174,7 @@
 
   <!-- 배경음악 -->
   <audio id="bgm" preload="auto" loop playsinline>
-    <source src="waitonyou_01.mp3" type="audio/mpeg">
-    <source src="waitonyou_01.ogg" type="audio/ogg">
+    <source src="https://downchurch.github.io/thanksgiving-invite/waitonyou_01.mp3" type="audio/mpeg">
   </audio>
   <button id="bgm-toggle">🔇</button>
 
@@ -229,42 +228,85 @@ const startBtn = document.getElementById("start-music");
 
 let isPlaying = false;
 
+// 디버깅용 콘솔 로그
+console.log("스크립트 시작");
+console.log("Audio 요소:", audio);
+console.log("오디오 소스:", audio.src);
+
 // 음악 재생 함수
 function playMusic() {
+  console.log("playMusic() 호출됨");
+  
+  if (!audio) {
+    console.error("오디오 요소를 찾을 수 없습니다");
+    return;
+  }
+
   audio.volume = 0.7;
+  
+  const playPromise = audio.play();
+  
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        console.log("음악 재생 성공");
+        isPlaying = true;
+        btn.textContent = "🔊";
+      })
+      .catch(err => {
+        console.error("음악 재생 실패:", err.message);
+        isPlaying = false;
+        btn.textContent = "🔇";
+        alert("음악 재생 실패:\n" + err.message + "\n\n파일 경로를 확인해주세요.");
+      });
+  }
+}
+
+// 초기 재생 버튼
+if (startBtn) {
+  startBtn.addEventListener("click", () => {
+    console.log("시작 버튼 클릭됨");
+    playPrompt.classList.add("hidden");
+    playMusic();
+  });
+} else {
+  console.error("시작 버튼을 찾을 수 없습니다");
+}
+
+// 토글 버튼
+if (btn) {
+  btn.addEventListener("click", () => {
+    console.log("토글 버튼 클릭됨, 현재 상태:", isPlaying);
+    
+    if (isPlaying) {
+      audio.pause();
+      btn.textContent = "🔇";
+      isPlaying = false;
+      console.log("음악 정지됨");
+    } else {
+      playMusic();
+    }
+  });
+} else {
+  console.error("토글 버튼을 찾을 수 없습니다");
+}
+
+// 페이지 로드 완료 후
+window.addEventListener("load", () => {
+  console.log("페이지 로드 완료");
+  
   audio.play()
     .then(() => {
+      console.log("자동재생 성공");
+      playPrompt.classList.add("hidden");
       isPlaying = true;
       btn.textContent = "🔊";
     })
-    .catch(err => {
-      console.log("자동재생 실패:", err);
-      isPlaying = false;
-      btn.textContent = "🔇";
+    .catch(() => {
+      console.log("자동재생 실패 (정상) - 프롬프트 표시");
+      playPrompt.classList.remove("hidden");
     });
-}
-
-// 초기 재생 버튼 클릭 (사용자 인터랙션)
-startBtn.addEventListener("click", () => {
-  playPrompt.classList.add("hidden");
-  playMusic();
 });
-
-// 토글 버튼
-btn.addEventListener("click", () => {
-  if (isPlaying) {
-    audio.pause();
-    btn.textContent = "🔇";
-    isPlaying = false;
-  } else {
-    playMusic();
-  }
-});
-
-// 페이지 로드 시 자동 시도 (대부분 실패하지만 시도)
-window.addEventListener("load", () => {
-  audio.play()
-    .then(() => {
-      playPrompt.classList.add("hidden");
-      isPlaying = true;
-      btn
+</script>
+</body>
+</html>
